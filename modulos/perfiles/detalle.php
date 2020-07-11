@@ -1,8 +1,10 @@
 <?php
 require_once '../../class/Perfil.php';
+require_once '../../class/Modulo.php';
 
 $id = $_GET['id'];
 $perfil = Perfil::obtenerPorId($id);
+$modulo = Modulo::obtenerModulosPorIdPerfil($id);
 
 ?>
 <!DOCTYPE html>
@@ -21,18 +23,9 @@ $perfil = Perfil::obtenerPorId($id);
 	<br><br>
 	<?php echo $perfil->getNombre();?>
 	<br><br>
-	<?php foreach ($perfil->arrModulos as $modulo) : ?>
+	<?php echo $modulo->getNombre();?>
+	</div>
 
-		<?php echo $modulo; ?>
-
-		<a href="/PaladinC/modulos/modulos/eliminar.php?id=<?php echo $modulo->getIdPerfilModulo(); ?>">
-		    Eliminar
-		</a>
-
-		<br>
-
-	<?php endforeach ?>
-	</div>  
 	<br><br><br><br><br><br>
 	<a href="listado.php"><div class="back"><img src="../../imagenes/regreso.png"></div></a>
 </div>

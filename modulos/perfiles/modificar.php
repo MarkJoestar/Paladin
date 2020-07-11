@@ -1,10 +1,13 @@
 <?php
 
 require_once '../../class/Perfil.php';
-
+require_once "../../class/Modulo.php";
 $id = $_GET['id'];
 
 $perfil = Perfil::obtenerPorId($id);
+
+
+$listadoModulos = Modulo::obtenerTodos();
 
 ?>
 
@@ -36,6 +39,17 @@ $perfil = Perfil::obtenerPorId($id);
 			<label><div class="titulo">Nombre:</div></label>
 		    <input type="text" name="txtNombre" class="forma" id="txtNombre" value="<?php echo $perfil->getNombre(); ?>">
 		    <br><br>
+            <select name="cboModulos[]" multiple style="width: 250px; height: 250px;" class="forma">
+
+                 <?php foreach ($listadoModulos as $modulo) :?>
+
+                    <option value="<?php echo $modulo->getIdModulo(); ?>">
+                        <?php echo $modulo ?>
+                    </option>
+
+                 <?php endforeach ?>
+            </select>
+            <br><br>
 
 		    <input type="submit" name="btnGuardar" value="Actualizar" onclick="validarDatos();">	
 		</form></div>

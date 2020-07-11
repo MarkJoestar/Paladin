@@ -29,7 +29,7 @@ $usuario = Usuario::obtenerPorId($id);
                 }
 
                 var nombre = document.getElementById("txtNombre").value;
-                if (password.trim() == "") {
+                if (nombre.trim() == "") {
                     alert("El nombre no debe estar vacio");
                     return;
                 }
@@ -67,29 +67,29 @@ $usuario = Usuario::obtenerPorId($id);
 
 			<input type="hidden" name="txtId" value="<?php echo $usuario->getIdUsuario(); ?>">
 			<label><div class="titulo">Username:</div></label>
-		    <input type="text" name="txtUsername" class="forma" value="<?php echo $usuario->getUsername(); ?>">
+		    <input type="text" name="txtUsername" class="forma" id="txtUsername" value="<?php echo $usuario->getUsername();?>">
 		    <br><br>
 		    <label><div class="titulo">Password:</div></label>
-		    <input type="password" name="txtPassrod" class="forma" value="<?php echo $usuario->getPassword(); ?>">
+		    <input type="password" name="txtPassrod" class="forma" id="txtPassword" value="<?php echo $usuario->getPassword(); ?>">
 		    <br><br>
 	        <label><div class="titulo">Nombre:</div></label>
-		    <input type="text" name="txtNombre" class="forma" value="<?php echo $usuario->getNombre(); ?>">
+		    <input type="text" name="txtNombre" class="forma" id="txtNombre" value="<?php echo $usuario->getNombre(); ?>">
 		    <br><br> <!-- Este es un comentario -->
 		    <label><div class="titulo">Apellido:</div></label>
-		    <input type="text" name="txtApellido" class="forma" value="<?php echo $usuario->getApellido(); ?>">
+		    <input type="text" name="txtApellido" class="forma" id="txtApellido" value="<?php echo $usuario->getApellido(); ?>">
 		    <br><br>
 		    <label><div class="titulo">Fecha Nacimiento:</div></label>
-		    <input type="date" name="txtFechaNacimiento" class="forma" value="<?php echo $usuario->getFechaNacimiento(); ?>">
+		    <input type="date" name="txtFechaNacimiento" class="forma" id="txtFechaNacimiento" value="<?php echo $usuario->getFechaNacimiento(); ?>">
 			<br><br> <!-- Salto de lineas -->
 			<label><div class="titulo">Tipo Documento: </div></label>
-			<select class="forma" name="cboTipoDocumento">
+			<select class="forma" name="cboTipoDocumento" id="cboTipoDocumento">
 			    <option value="0">Seleccionar</option>
 			    <option value="1">DNI</option>
                 <option value="2">Cedula</option>
 			</select>
 			<br><br> <!-- Salto de lineas -->
 		    <label><div class="titulo">Numero Documento:</div></label>
-		    <input type="text" name="txtNumeroDocumento" class="forma" value="<?php echo $usuario->getNumeroDocumento(); ?>">
+		    <input type="text" name="txtNumeroDocumento" class="forma" id="txtNumeroDocumento" value="<?php echo $usuario->getNumeroDocumento(); ?>">
 			<br><br> <!-- Salto de lineas -->
 
 		    <input type="submit" name="btnGuardar" value="Actualizar" onclick="validarDatos();">			

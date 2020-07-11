@@ -8,7 +8,7 @@
             
             function validarDatos() {
                 var nombre = document.getElementById("txtNombre").value;
-                if (password.trim() == "") {
+                if (nombre.trim() == "") {
                     alert("El nombre no debe estar vacio");
                     return;
                 }
@@ -45,19 +45,19 @@
 
 		<form name="frmDatos" method="POST" action="procesar/guardar.php">
 
-	        <label>Nombre:</label>
+	        <label><div class="titulo">Nombre:</div></label>
 		    <input type="text" name="txtNombre" class="forma" id="txtNombre">
 		    <br><br> 
 
-		    <label>Apellido:</label>
+		    <label><div class="titulo">Apellido:</div></label>
 		    <input type="text" name="txtApellido" class="forma" id="txtApellido">
 		    <br><br>
 
-		    <label>Fecha Nacimiento:</label>
+		    <label><div class="titulo">Fecha Nacimiento:</div></label>
 		    <input type="date" class="forma" name="txtFechaNacimiento">
 			<br><br> 
 
-			<label>Tipo Documento: </label>
+			<label><div class="titulo">Tipo Documento: </div></label>
 			<select class="forma" name="cboTipoDocumento" id="cboTipoDocumento">
 			    <option value="0">Seleccionar</option>
 			    <option value="1">DNI</option>
@@ -65,13 +65,13 @@
 			</select>
 			<br><br>
 
-		    <label>Numero Documento:</label>
+		    <label><div class="titulo">Numero Documento:</div></label>
 		    <input type="text" class="forma" name="txtNumeroDocumento" id="txtNumeroDocumento">
 			<br><br> 
 
-		    <label>Sueldo:</label>
+		    <label><div class="titulo">Sueldo:</div></label>
 		    <input type="text" class="forma" name="txtSueldo">
-			<br><br> 
+			<br><br>
 
 		    <input type="submit" name="btnGuardar" value="Guardar" onclick="validarDatos();">			
 		</form></div><br><br><br><br><br><br><br>

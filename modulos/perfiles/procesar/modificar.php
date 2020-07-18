@@ -5,11 +5,12 @@ require_once '../../../class/PerfilModulo.php';
 
 $id = $_POST['txtId'];
 $nombre = $_POST['txtNombre'];
+$listaModulos = $_POST['cboModulos'];
 
 
 if (empty(trim($nombre))) {
 	echo "ERROR NOMBRE VACIO";
-	header("location: ../alta.php");
+	header("location: ../modificar.php");
 	exit;
 }
 
@@ -19,11 +20,11 @@ $perfil->setNombre($nombre);
 $perfil->actualizar();
 
 foreach ($listaModulos as $modulo_id) {
-	$perfilModulo = new PerfilModulo();
+	$perfilModulo = PerfilModulo::obtenerPorId($id);
 	$perfilModulo->setIdPerfil($perfil->getIdPerfil());
 	$perfilModulo->setIdModulo($modulo_id);
-	$perfilModulo->guardar();
+	$perfilModulo->actualizar();
 }
 
-highlight_string(var_export($perfil, true));
+//highlight_string(var_export($perfil, true));
 header('Location: ../listado.php?mensaje=2');

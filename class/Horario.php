@@ -44,17 +44,18 @@ class Horario {
         $datos = $mysql->consultar($sql);
         $mysql->desconectar();
 
-        $listado = self::_generarListadoUsuarios($datos);
+        $listado = self::_generarListadoHorarios($datos);
 
         return $listado;
     }
         private function _generarHorario($datos) {
         $horario = new Horario($data['hora_entrada'], $data['hora_salida']);
+        $horario->_idHorario = $data['id_horario'];
         return $horario;
     }
     public static function obtenerPorId($id) {
 
-        $sql = "SELECT * FROM horario WHERE id_horario =" . $id;
+        $sql = "SELECT * FROM horario WHERE id_horario = " . $id;
 
 
         $mysql = new MySQL();
@@ -66,15 +67,17 @@ class Horario {
 
 
         $horario = new Horario($registro['hora_entrada'], $registro['hora_salida']);
+        $horario->_idHorario = $registro['id_horario'];
 
         return $horario;
     }
 
 
-    private function _generarListadoUsuarios($datos) {
+    private function _generarListadoHorarios($datos) {
         $listado = array();
         while ($registro = $datos->fetch_assoc()) {
             $usuario = new Horario ($registro['hora_entrada'], $registro['hora_entrada']);
+            $horario->_idHorario = $registro['id_horario'];
             $listado[] = $usuario;
         }
         return $listado;

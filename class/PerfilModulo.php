@@ -1,4 +1,7 @@
 <?php
+require_once 'MySQL.php';
+require_once 'Perfil.php';
+
 
 class PerfilModulo {
 
@@ -43,6 +46,25 @@ class PerfilModulo {
         return $this;
     }
 
+    public static function obtenerPorId($id) {
+
+        $sql = "SELECT * FROM perfil_modulo WHERE id_perfil_modulo =" . $id;
+
+
+        $mysql = new MySQL();
+        $datos = $mysql->consultar($sql);
+        $mysql->desconectar();
+
+
+        $registro = $datos->fetch_assoc();
+
+
+        $perfilModulo = new PerfilModulo($registro['id_perfil_modulo']);
+        $perfilModulo->_idModulo = $registro['id_modulo'];
+        $perfilModulo->_idPerfil = $registro['id_perfil'];
+        return $perfilModulo;
+    }
+
     public function guardar() {
         $sql = "INSERT INTO perfil_modulo (id_perfil_modulo, id_perfil, id_modulo) "
              . "VALUES (NULL, $this->_idPerfil, $this->_idModulo)";
@@ -53,6 +75,21 @@ class PerfilModulo {
         $this->_idPerfilModulo = $idInsertado;
     }
 
+     public function actualizar() {
+
+        $sql = "UPDATE perfil_modulo SET id_modulo = $this->_idModulo WHERE id_perfil = $this->_idPerfil";
+        $mysql = new MySQL();
+        $mysql->actualizar($sql);
+        //echo $sql;
+        //exit;
+    }
+
+    public function eliminar(){
+
+        $sql = "DELETE FROM perfil_modulo WHERE id_perfil_modulo = $this->_idPerfilModulo";
+        $mysql = new MySQL();
+        $mysql->eliminar($sql);
+    }
 }
 
 ?>

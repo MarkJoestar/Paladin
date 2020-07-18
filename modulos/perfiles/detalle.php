@@ -1,10 +1,8 @@
 <?php
 require_once '../../class/Perfil.php';
-require_once '../../class/Modulo.php';
 
 $id = $_GET['id'];
 $perfil = Perfil::obtenerPorId($id);
-$modulo = Modulo::obtenerModulosPorIdPerfil($id);
 
 ?>
 <!DOCTYPE html>
@@ -23,7 +21,11 @@ $modulo = Modulo::obtenerModulosPorIdPerfil($id);
 	<br><br>
 	<?php echo $perfil->getNombre();?>
 	<br><br>
-	<?php echo $modulo->getNombre();?>
+	<?php foreach ($perfil->getModulos() as $modulo): ?>
+
+		<?php echo $modulo->getNombre(); ?>
+
+	<?php endforeach ?>
 	</div>
 
 	<br><br><br><br><br><br>

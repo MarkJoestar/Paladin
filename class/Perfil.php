@@ -53,7 +53,7 @@ class Perfil {
         private function _generarPerfil($datos) {
         $perfil = new Perfil($data['nombre']);
         $perfil->_idPerfil = $data['id_perfil'];
-        $perfil->_arrModulos = Modulo::obtenerModulosPorIdPerfil($perfil->_idPerfil);
+        $perfil->setModulos();
         return $perfil;
     }
     public static function obtenerPorId($id) {
@@ -81,7 +81,6 @@ class Perfil {
         while ($registro = $datos->fetch_assoc()) {
             $perfil = new Perfil($registro['nombre']);
             $perfil->_idPerfil = $registro['id_perfil'];
-            $perfil->_arrModulos = Modulo::obtenerModulosPorIdPerfil($perfil->_idPerfil);
             $listado[] = $perfil;
         }
         return $listado;
@@ -117,5 +116,9 @@ class Perfil {
 
     public function __ToString(){
         return $this->_nombre;
+    }
+
+    public function setModulos() {
+        $this->_arrModulos = Modulo::obtenerPorIdPerfil($this->_idPerfil);
     }
 }

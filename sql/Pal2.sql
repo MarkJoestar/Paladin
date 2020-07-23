@@ -107,6 +107,7 @@ CREATE TABLE IF NOT EXISTS`Persona` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `EmpleadoDia` (
   `id_empleado_dia` INT NOT NULL,
+  `id_empleado` INT NOT NULL,
   `lunes` INT NULL,
   `martes` INT NULL,
   `miercoles` INT NULL,
@@ -123,7 +124,6 @@ CREATE TABLE IF NOT EXISTS `Empleado` (
   `id_empleado` INT NOT NULL,
   `sueldo` CHAR(5) NOT NULL,
   `id_persona` INT NOT NULL,
-  `id_empleado_dia` INT NOT NULL,
   PRIMARY KEY (`id_empleado`)
   );
 -- -----------------------------------------------------
@@ -235,9 +235,10 @@ CREATE TABLE IF NOT EXISTS `Modulo` (
 -- Table `mydb`.`Perfil_Modulo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Perfil_Modulo` (
+  `id_perfil_modulo` INT NOT NULL,
   `id_perfil` INT NOT NULL,
   `id_modulo` INT NOT NULL,
-  PRIMARY KEY (`id_perfil`, `id_modulo`)
+  PRIMARY KEY (`id_perfil_modulo`)
   );
 -- -----------------------------------------------------
 -- Table `mydb`.`Registro`
@@ -249,6 +250,54 @@ CREATE TABLE IF NOT EXISTS `Registro` (
   PRIMARY KEY (`id_registro`)
   );
 
+ALTER TABLE `Domicilio`
+  MODIFY `id_domicilio` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `Empleado`
+  MODIFY `id_empleado` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `Modulo`
+  MODIFY `id_modulo` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `Perfil`
+  MODIFY `id_perfil` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `Perfil_Modulo`
+  MODIFY `id_perfil_modulo` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `Persona`
+  MODIFY `id_persona` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `Persona_Contacto`
+  MODIFY `id_persona_contacto` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `TipoContacto`
+  MODIFY `id_tipo_contacto` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `TipoDocumento`
+  MODIFY `id_tipo_documento` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `Senial`
+  MODIFY `id_senial` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `Sensor`
+  MODIFY `id_sensor` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `SensorEstado`
+  MODIFY `id_sensor_estado` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `Ubicacion`
+  MODIFY `id_ubicacion` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `Camara`
+  MODIFY `id_camara` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `CamaraEstado`
+  MODIFY `id_camara_estado` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `Horario`
+  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `Asistencia`
+  MODIFY `id_asistencia` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `Barrio`
+  MODIFY `id_barrio` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `Video`
+  MODIFY `id_video` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `EmpleadoDia`
+  MODIFY `id_empleado_dia` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `Registro`
+  MODIFY `id_registro` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `Empleado_Funcion`
+  MODIFY `id_empleado` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `Usuario`
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `Funcion`
+MODIFY `id_funcion` int(11) NOT NULL AUTO_INCREMENT;
 
 /*SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

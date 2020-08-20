@@ -98,15 +98,31 @@ class Perfil {
         //echo $sql;
         //exit;
     }
-    public function actualizar() {
+    public function tieneModulo($idModulo) {
+        $sql = "SELECT * FROM perfil_modulo "
+             . "WHERE id_modulo = $idModulo "
+             . "AND id_perfil = $this->_idPerfil";
 
-        $sql = "UPDATE Perfil SET nombre = '$this->_nombre' WHERE id_perfil = $this->_idPerfil";
         $mysql = new MySQL();
-        $mysql->actualizar($sql);
-        //echo $sql;
-        //exit;
+        $result = $mysql->consultar($sql);
+        $mysql->desconectar();
+
+        return $result->num_rows > 0;
     }
 
+
+    public function actualizar() {
+        $sql = "UPDATE perfil SET nombre = '$this->_nombre' WHERE id_perfil = $this->_idPerfil";
+        $mysql = new MySQL();
+        $mysql->actualizar($sql);
+    }
+
+    public function eliminarModulos() {
+        $sql = "DELETE FROM perfil_modulo WHERE id_perfil = $this->_idPerfil";
+        $mysql = new MySQL();
+        $mysql->actualizar($sql);
+    }
+    
     public function eliminar(){
 
         $sql = "DELETE FROM Perfil WHERE id_perfil = $this->_idPerfil";

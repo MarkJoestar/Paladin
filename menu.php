@@ -35,6 +35,8 @@ $usuario = $_SESSION['usuario'];
 <a href="/PaladinC/modulos/ubicaciones/listado.php"><div class="enlace">Ubicaciones</div></a>
 <br><br>
 <a href="/PaladinC/modulos/camaras/listado.php"><div class="enlace">Camaras</div></a>
+<br><br>
+<a href="/PaladinC/modulos/barrios/listado.php"><div class="enlace">Barrios</div></a>
 <br><br><br><br><br><br><br><br>
 <a href="/PaladinC/logout.php"><div class="out">Salir</div></a></div>
 </body>

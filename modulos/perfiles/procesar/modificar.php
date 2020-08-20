@@ -1,30 +1,31 @@
 <?php
 
-require_once "../../../class/Perfil.php";
+require_once '../../../class/Perfil.php';
 require_once '../../../class/PerfilModulo.php';
 
-$id = $_POST['txtId'];
+$idPerfil = $_POST['txtIdPerfil'];
 $nombre = $_POST['txtNombre'];
 $listaModulos = $_POST['cboModulos'];
 
+//highlight_string(var_export($modulos, true));
+//exit;
 
-if (empty(trim($nombre))) {
-	echo "ERROR NOMBRE VACIO";
-	header("location: ../modificar.php");
-	exit;
-}
 
-$perfil = Perfil::obtenerPorId($id);
+$perfil = Perfil::obtenerPorId($idPerfil);
 $perfil->setNombre($nombre);
-
 $perfil->actualizar();
 
+
+$perfil->eliminarModulos();
+
 foreach ($listaModulos as $modulo_id) {
-	$perfilModulo = PerfilModulo::obtenerPorId($id);
+	$perfilModulo = new PerfilModulo();
 	$perfilModulo->setIdPerfil($perfil->getIdPerfil());
 	$perfilModulo->setIdModulo($modulo_id);
-	$perfilModulo->actualizar();
+	$perfilModulo->guardar();
 }
+
 
 //highlight_string(var_export($perfil, true));
 header('Location: ../listado.php?mensaje=2');
+?>

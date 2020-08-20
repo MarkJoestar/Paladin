@@ -19,10 +19,16 @@ $empleado = Empleado::obtenerPorId($id);
 	<?php echo $empleado->getNumeroDocumento();?>
 	<br><br>
 	<?php echo $empleado->getFechaNacimiento();?>
-	</div>  
-	<br><br><br><br><br><br>
-	<a href="listado.php"><div class="back"><img src="../../imagenes/regreso.png"></div></a>
-</div>
+	<br><br>
+	<?php foreach ($empleado->getFunciones() as $funcion): ?>
 
+		<?php echo $funcion->getDescripcion(); ?>
+
+	<?php endforeach ?>
+	</div>  
+
+<br><br><br><br><br><br>
+<a href="listado.php"><div class="back"><img src="../../imagenes/regreso.png"></div></a>
+</div>
 </body>
 </html>

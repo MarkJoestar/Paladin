@@ -8,7 +8,7 @@
             function validarDatos() {
                 var descripcion = document.getElementById("txtDescripcion").value;
                 if (descripcion.trim() == "") {
-                    alert("El descripcion no debe estar vacio");
+                    alert("La descripcion no debe estar vacio");
                     return;
                 }
                 var form = document.getElementById("frmDatos");

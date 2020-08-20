@@ -53,6 +53,13 @@ $empleado->setSueldo($sueldo);
 
 $empleado->guardar();
 
+foreach ($listaFunciones as $id_funcion) {
+	$empleadoFuncion = new EmpleadoFuncion();
+	$empleadoFuncion->setIdEmpleado($empleado->getIdEmpleado());
+	$empleadoFuncion->setIdFuncion($id_funcion);
+	$empleadoFuncion->guardar();
+}
+
 highlight_string(var_export($empleado, true));
 header('Location: ../listado.php?mensaje=1');
 

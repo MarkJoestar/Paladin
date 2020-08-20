@@ -68,6 +68,21 @@ class Funcion {
         return $funcion;
     }
 
+    public static function obtenerFuncionesPorIdEmpleado($idEmpleado) {
+        $sql = "SELECT funcion.id_funcion, funcion.descripcion "
+             . "FROM funcion "
+             . "INNER JOIN empleado_funcion on empleado_funcion.id_funcion = funcion.id_funcion "
+             . "INNER JOIN empleado on empleado.id_empleado = empleado_funcion.id_empleado "
+             . "WHERE empleado.id_empleado = " . $idEmpleado;
+
+        $mysql = new MySQL();
+        $datos = $mysql->consultar($sql);
+        $mysql->desconectar();
+
+        $listado = self::_generarListadoFunciones($datos);
+        return $listado;
+    }
+
 
     private function _generarListadoFunciones($datos) {
         $listado = array();

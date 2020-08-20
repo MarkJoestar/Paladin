@@ -107,7 +107,6 @@ CREATE TABLE IF NOT EXISTS`Persona` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `EmpleadoDia` (
   `id_empleado_dia` INT NOT NULL,
-  `id_empleado` INT NOT NULL,
   `lunes` INT NULL,
   `martes` INT NULL,
   `miercoles` INT NULL,
@@ -124,6 +123,7 @@ CREATE TABLE IF NOT EXISTS `Empleado` (
   `id_empleado` INT NOT NULL,
   `sueldo` CHAR(5) NOT NULL,
   `id_persona` INT NOT NULL,
+  `id_empleado_dia` INT NOT NULL,
   PRIMARY KEY (`id_empleado`)
   );
 -- -----------------------------------------------------
@@ -156,11 +156,10 @@ CREATE TABLE IF NOT EXISTS `TipoContacto` (
 -- Table `mydb`.`Persona_Contacto`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Persona_Contacto` (
- `id_persona_contacto` INT NOT NULL,
- `id_persona` INT NOT NULL,
- `id_tipo_contacto` INT NOT NULL,
- `valor` VARCHAR(30) NOT NULL,
-  PRIMARY KEY (`id_persona_contacto`)
+  `id_persona` INT NOT NULL,
+  `id_tipo_contacto` INT NOT NULL,
+  `valor` VARCHAR(30) NOT NULL,
+  PRIMARY KEY (`id_tipo_contacto`)
   );
 -- -----------------------------------------------------
 -- Table `mydb`.`Barrio`
@@ -190,9 +189,10 @@ CREATE TABLE IF NOT EXISTS `Domicilio` (
 -- Table `mydb`.`Empleado_Funcion`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Empleado_Funcion` (
+  `id_empleado_funcion` INT NOT NULL,
   `id_empleado` INT NOT NULL,
   `id_funcion` INT NOT NULL,
-  PRIMARY KEY (`id_empleado`, `id_funcion`)
+  PRIMARY KEY (`id_empleado_funcion`)
   );
 -- -----------------------------------------------------
 -- Table `mydb`.`Asistencia`
@@ -202,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `Asistencia` (
   `fecha_hora_ingreso` DATETIME NOT NULL,
   `fecha_hora_salida` DATETIME NOT NULL,
   `id_empleado` INT NOT NULL,
-  PRIMARY KEY (`id_asistencia`, `id_empleado`)
+  PRIMARY KEY (`id_asistencia`)
   );
 -- -----------------------------------------------------
 -- Table `mydb`.`Perfil`
@@ -250,7 +250,7 @@ CREATE TABLE IF NOT EXISTS `Registro` (
   `id_senial` INT NOT NULL,
   PRIMARY KEY (`id_registro`)
   );
-
+  
 ALTER TABLE `Domicilio`
   MODIFY `id_domicilio` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `Empleado`
@@ -299,36 +299,7 @@ ALTER TABLE `Usuario`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `Funcion`
 MODIFY `id_funcion` int(11) NOT NULL AUTO_INCREMENT;
-INSERT INTO `persona` (`nombre`, `apellido`, `fecha_nacimiento`, `numero_documento`, `estado`, `id_tipo_documento`) VALUES
-('Mario', 'Billordo', NULL, NULL, 1, NULL),
-('Aide', 'Figueredo', NULL, NULL, 1, NULL),
-('Vanesa', 'Figueredo', NULL, NULL, 1, NULL);
-INSERT INTO `empleado` (`id_persona`, `sueldo`, `id_empleado_dia`) VALUES
-(1, '40000', 1),
-(2, '40000', 2),
-(3, '30000', 3);
-INSERT INTO `usuario` (`username`, `password`, `id_persona`, `id_perfil`) VALUES
-('M4R10', '1111', 1, 1),
-('Aide00', '2222', 2, 1),
-('Vane32', '3333', 3, 1);
-INSERT INTO `camara` (`modelos`, `id_ubicacion`, `id_camara_estado`) values
-('EZVIZ 1589', 1, 1);
-INSERT INTO `sensor` (`modelo`, `id_sensor_estado`) values
-('Ledvance', 1);
-INSERT INTO `ubicacion` (`descripcion`) values
-('Esquina Norte-este');
-INSERT INTO `funcion` (`descripcion`) values
-('Cajero');
-INSERT INTO `perfil` (`nombre`) values
-('Ordenador de stock'),
-('Cajero');
-INSERT INTO `modulo` (`nombre`) values 
-('compra'),
-('seguridad'),
-('ventas');
-INSERT INTO `perfil_modulo` (`id_perfil`, `id_modulo`) values
-(2, 1),
-(2, 3);
+
 
 /*SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

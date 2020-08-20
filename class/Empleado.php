@@ -2,12 +2,14 @@
 
 require_once 'Persona.php';
 require_once 'MySQL.php';
+require_once 'Funcion.php';
 
 
 class Empleado extends Persona {
 
 	private $_idEmpleado;
     private $_sueldo;
+    private $_arrFunciones;
 	
 	public function getIdEmpleado()
 	{
@@ -24,6 +26,9 @@ class Empleado extends Persona {
         $this->_sueldo = $_sueldo;
 
         return $this;
+    }
+    public function getFunciones(){
+        $this->_arrFunciones;
     }
 
 
@@ -43,7 +48,7 @@ class Empleado extends Persona {
 
     public static function obtenerPorId($id) {
 
-        $sql = "SELECT * FROM empleado AS e JOIN persona AS p ON e.id_persona = p.id_persona WHERE id_empleado =" . $id;
+        $sql = "SELECT * FROM empleado AS e JOIN persona AS p ON e.id_persona = p.id_persona WHERE id_empleado = " . $id;
 
 
         $mysql = new MySQL();
@@ -61,9 +66,12 @@ class Empleado extends Persona {
         $empleado->_numeroDocumento = $registro['numero_documento'];
         $empleado->_fechaNacimiento = $registro['fecha_nacimiento'];
         $empleado->_sueldo = $registro['sueldo'];
+        $empleado->_arrFunciones = Funcion::obtenerFuncionesPorIdEmpleado($empleado->_idEmpleado);
 
         return $empleado;
     }
+        
+
         private function _generarEmpleado($datos) {
         $empleado = new Empleado($data['nombre'], $data['apellido']);
         $empleado->_idEmpleado = $data['id_empleado'];
@@ -74,6 +82,8 @@ class Empleado extends Persona {
         $empleado->_numeroDocumento = $data['numero_documento'];
         $empleado->_estado = $data['id_estado'];
         $empleado->_sueldo = $data['sueldo'];
+        $empleado->setFunciones();
+        $empleado->setDomicilio();
         return $empleado;
     }
 
@@ -101,20 +111,43 @@ class Empleado extends Persona {
 
         $this->_idEmpleado = $idInsertado;
     }
-    public function actualizar() {
-    parent::actualizar();
+    public function tieneFuncion($idFuncion) {
+        $sql = "SELECT * FROM empleado_funcion "
+             . "WHERE id_funcion = $idFuncion "
+             . "AND id_empleado = $this->_idEmpleado";
 
-    $sql = "UPDATE Empleado SET sueldo = '$this->_sueldo' WHERE id_empleado = $this->_idEmpleado";
-    $mysql = new MySQL();
-    $mysql->actualizar($sql);
+        $mysql = new MySQL();
+        $result = $mysql->consultar($sql);
+        $mysql->desconectar();
+
+        return $result->num_rows > 0;
     }
 
+    public function actualizar() {
+        $sql = "UPDATE empleado SET sueldo = '$this->_sueldo' WHERE id_empleado = $this->_idEmpleado";
+        $mysql = new MySQL();
+        $mysql->actualizar($sql);
+    }
+
+    public function eliminarFunciones() {
+        $sql = "DELETE FROM empleado_funcion WHERE id_empleado = $this->id_empleado";
+        $mysql = new MySQL();
+        $mysql->actualizar($sql);
+    }
+    
     public function eliminar(){
         parent::eliminar();
-
-        $sql = "DELETE * FROM Empleado WHERE id_empleado = $this->_idEmpleado";
+        $sql = "DELETE FROM empleado WHERE id_empleado = $this->_idEmpleado";
         $mysql = new MySQL();
         $mysql->eliminar($sql);
+    }
+
+    public function __ToString(){
+        return $this->_nombre . ", " . $this->_apellido;
+    }
+
+    public function setFunciones() {
+        $this->_arrFunciones = Funcion::obtenerPorIdEmpleado($this->_idEmpleado);
     }
 }
 ?>

@@ -1,9 +1,9 @@
 <?php
 require_once 'MySQL.php';
-require_once 'Empleado.php'
+require_once 'Empleado.php';
 
 class EmpleadoDia{
-	private $_idEmpleadoDia;
+	private $_idEmpleado;
 	private $_lunes;
     private $_martes;
     private $_miercoles;
@@ -12,9 +12,9 @@ class EmpleadoDia{
     private $_sabado;
     private $_domingo;
 
-	public function getIdEmpleadoDia()
+	public function getIdEmpleado()
     {
-        return $this->_idEmpleadoDia; 
+        return $this->_idEmpleado; 
     }
 
     public function getLunes()

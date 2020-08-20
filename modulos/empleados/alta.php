@@ -1,3 +1,10 @@
+<?php
+
+require_once "../../class/Funcion.php";
+
+$listadoFunciones = Funcion::obtenerTodos();
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,6 +79,18 @@
 		    <label><div class="titulo">Sueldo:</div></label>
 		    <input type="text" class="forma" name="txtSueldo">
 			<br><br>
+            <label><div class="titulo">Funciones: </div></label>
+            <select name="cboFunciones[]" multiple style="width: 250px; height: 250px;" class="forma">
+
+                 <?php foreach ($listadoFunciones as $funcion) :?>
+
+                    <option value="<?php echo $funcion->getIdFuncion(); ?>">
+                        <?php echo $funcion ?>
+                    </option>
+
+                 <?php endforeach ?>
+            </select>
+            <br><br>
 
 		    <input type="submit" name="btnGuardar" value="Guardar" onclick="validarDatos();">			
 		</form></div><br><br><br><br><br><br><br>

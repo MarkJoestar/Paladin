@@ -62,7 +62,7 @@ $listadoEmpleado = Empleado::obtenerTodos();
 				<td><div class="dato"><?php echo $empleado->getApellido(); ?></div></td>
 				<td><a href="detalle.php?id=<?php echo $empleado->getIdEmpleado()?>"><img src="../../imagenes/detalle.png"></a>
 				<a href="modificar.php?id=<?php echo $empleado->getIdEmpleado()?>"><img src="../../imagenes/ajustes.png"></a>
-				<a href="eliminar.php?id<?php echo $empleado->getIdEmpleado()?>"><img src="../../imagenes/dejar.png"></a>
+				<a href="procesar/eliminar.php?id<?php echo $empleado->getIdEmpleado()?>"><img src="../../imagenes/dejar.png"></a>
 				</td>
 			</tr>
 

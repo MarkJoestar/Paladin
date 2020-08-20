@@ -71,3 +71,8 @@ th, td {
 .back {
 	text-align: left;
 }
+.dom{
+	font-size: 12px;
+	font-weight: bold;
+	color: green;
+}

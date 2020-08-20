@@ -1,5 +1,5 @@
 <?php
-
+require_once 'Domicilio.php';
 require_once 'MySQL.php';
 
 
@@ -12,6 +12,7 @@ class Persona {
 	protected $_idTipoDocumento;
     protected $_numeroDocumento;
 	protected $_estado;
+    public $domicilio;
 
 	const ACTIVO = 1;
 
@@ -137,9 +138,13 @@ class Persona {
 
         $mysql = new MySQL();
         $mysql->eliminar($sql);
+        echo $sql;
+        exit;
     }
 
-
+    public function setDomicilio() {
+        $this->domicilio = Domicilio::obtenerPorIdPersona($this->_idPersona);
+    }
 
     public function __toString() {
     	return $this->_nombre . ", " . $this->_apellido;

@@ -5,7 +5,7 @@ require_once "../../class/Barrio.php";
 $listadoBarrio = Barrio::obtenerTodos();
 
 $idPersona = $_GET['idPersona'];
-$idLlamada = $_GET['idLlamada'];
+$idEmpleado = $_GET['idEmpleado'];
 $moduloLlamada = $_GET['modulo'];
 
 ?>
@@ -46,7 +46,7 @@ $moduloLlamada = $_GET['modulo'];
 
 		<form name="frmDatos" method="POST" action="procesar/guardar.php">
             <input type="hidden" name="txtIdPersona" value='<?php echo $idPersona ?>'>
-            <input type="hidden" name="txtIdLlamada" value='<?php echo $idLlamada ?>'>
+            <input type="hidden" name="txtIdEmpleado" value='<?php echo $idEmpleado ?>'>
             <input type="hidden" name="txtModulo" value='<?php echo $moduloLlamada ?>'>
 
 	        <label><div class="titulo">Calle:</div></label>
@@ -73,7 +73,7 @@ $moduloLlamada = $_GET['modulo'];
             <input type="text" class="forma" name="txtSector" id="txtSector">
             <br><br> 
             <label><div class="titulo">Barrio:</div></label>
-            <select name="cboBarrios" class="forma">
+            <select name="cboBarrio" class="forma">
                 <option value="0">Seleccionar</option>
                 <?php foreach ($listadoBarrio as $barrio): ?>
                     <option value="<?php echo $barrio->getIdBarrio(); ?>">

@@ -47,15 +47,16 @@ class EmpleadoFuncion {
     }
 
     public function guardar() {
-        $sql = "INSERT INTO empleado_funcion (id_empleado_funcion, id_emplado, id_funcion) "
+        $sql = "INSERT INTO Empleado_Funcion (id_empleado_funcion, id_emplado, id_funcion) "
              . "VALUES (NULL, $this->_idEmpleado, $this->_idFuncion)";
 
         $mysql = new MySQL();
         $idInsertado = $mysql->insertar($sql);
 
         $this->_idEmpleadoFuncion = $idInsertado;
+        echo $sql;
+        exit;
     }
-
 }
 
 

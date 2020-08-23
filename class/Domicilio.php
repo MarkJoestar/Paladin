@@ -10,6 +10,7 @@ class Domicilio {
 	private $_torre;
 	private $_piso;
 	private $_manzana;
+    private $_altura;
     private $_numeroCasa;
     private $_sector;
 	private $_idPersona;
@@ -54,9 +55,21 @@ class Domicilio {
         return $this;
     }
 
-    public function getNumeroCasa()
+        public function getAltura()
     {
         return $this->_altura;
+    }
+
+    public function setAltura($_altura)
+    {
+        $this->_altura = $_altura;
+
+        return $this;
+    }
+
+    public function getNumeroCasa()
+    {
+        return $this->_numeroCasa;
     }
 
     public function setNumeroCasa($_numeroCasa)

@@ -1,5 +1,6 @@
 <?php  
 require_once "../../../class/Empleado.php";
+require_once "../../../class/EmpleadoFuncion.php";
 
 $nombre = $_POST['txtNombre'];
 $apellido = $_POST['txtApellido'];
@@ -7,6 +8,7 @@ $fechaNacimiento = $_POST['txtFechaNacimiento'];
 $tipoDocumento = $_POST['cboTipoDocumento'];
 $numeroDocumento = $_POST['txtNumeroDocumento'];
 $sueldo = $_POST['txtSueldo'];
+$listaFunciones = $_POST['cboFunciones'];
 
 
 if (empty(trim($nombre))) {
@@ -53,10 +55,10 @@ $empleado->setSueldo($sueldo);
 
 $empleado->guardar();
 
-foreach ($listaFunciones as $id_funcion) {
+foreach ($listaFunciones as $funcion_id) {
 	$empleadoFuncion = new EmpleadoFuncion();
 	$empleadoFuncion->setIdEmpleado($empleado->getIdEmpleado());
-	$empleadoFuncion->setIdFuncion($id_funcion);
+	$empleadoFuncion->setIdFuncion($funcion_id);
 	$empleadoFuncion->guardar();
 }
 

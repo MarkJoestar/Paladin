@@ -3,13 +3,16 @@ require_once "../../../class/Domicilio.php";
 
 $idPersona = $_POST['txtIdPersona'];
 $idEmpleado = $_POST['txtIdEmpleado'];
+//$idBarrio = $_POST['txtBarrio'];
 $calle = $_POST['txtCalle'];
 $manzana = $_POST['txtManzana'];
 $numeroCasa = $_POST['txtNumeroCasa'];
 $piso = $_POST['txtPiso'];
 $torre = $_POST['txtTorre'];
 $sector = $_POST['txtSector'];
+$modulo = $_POST['txtModulo'];
 $barrio = $_POST['cboBarrio'];
+
 
 
 if (empty(trim($calle))) {
@@ -40,12 +43,12 @@ $domicilio->setPiso($piso);
 $domicilio->setTorre($torre);
 $domicilio->setSector($sector);
 $domicilio->setIdPersona($idPersona);
-$domicilio->setIdBarrio($idBarrio);
+$domicilio->setIdBarrio($barrio);
 
 $domicilio->guardar();
 
 //highlight_string(var_export($domicilio, true));
-header("location: /PaladinC/modulos/$modulo/detalle.php?id=$idLlamada");
+header("location: /Paladin/modulos/$modulo/detalle.php?id=$idEmpleado");
 
 
 ?>

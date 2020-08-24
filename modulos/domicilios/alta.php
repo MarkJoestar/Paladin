@@ -77,7 +77,7 @@ $moduloLlamada = $_GET['modulo'];
                 <option value="0">Seleccionar</option>
                 <?php foreach ($listadoBarrio as $barrio): ?>
                     <option value="<?php echo $barrio->getIdBarrio(); ?>">
-                        <?php echo $barrio; ?>
+                    <?php echo $barrio; ?>
                     </option>
                     <?php endforeach ?>
                 </select>

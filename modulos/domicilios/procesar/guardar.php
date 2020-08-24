@@ -1,5 +1,6 @@
 <?php  
 require_once "../../../class/Domicilio.php";
+require_once "../../../class/Barrio.php";
 
 $idPersona = $_POST['txtIdPersona'];
 $idEmpleado = $_POST['txtIdEmpleado'];
@@ -43,12 +44,12 @@ $domicilio->setPiso($piso);
 $domicilio->setTorre($torre);
 $domicilio->setSector($sector);
 $domicilio->setIdPersona($idPersona);
-$domicilio->setIdBarrio($barrio);
+$domicilio->getIdBarrio($barrio);
 
 $domicilio->guardar();
 
 //highlight_string(var_export($domicilio, true));
-header("location: /Paladin/modulos/$modulo/detalle.php?id=$idEmpleado");
+header("location: /PaladinC/modulos/$modulo/detalle.php?id=$idEmpleado");
 
 
 ?>

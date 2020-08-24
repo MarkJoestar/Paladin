@@ -10,7 +10,6 @@ class Domicilio {
 	private $_torre;
 	private $_piso;
 	private $_manzana;
-    private $_altura;
     private $_numeroCasa;
     private $_sector;
 	private $_idPersona;
@@ -51,18 +50,6 @@ class Domicilio {
     public function setPiso($_piso)
     {
         $this->_piso = $_piso;
-
-        return $this;
-    }
-
-        public function getAltura()
-    {
-        return $this->_altura;
-    }
-
-    public function setAltura($_altura)
-    {
-        $this->_altura = $_altura;
 
         return $this;
     }
@@ -152,6 +139,7 @@ class Domicilio {
     	if ($datos->num_rows > 0) {
             $domicilio = new Domicilio();
 	    	$domicilio->_idDomicilio = $data['id_domicilio'];
+            $domicilio->_numeroCasa = $data['numero_casa'];
 	    	$domicilio->_calle = $data['calle'];
 	    	$domicilio->_piso = $data['piso'];
 	    	$domicilio->_piso = $data['piso'];
@@ -164,13 +152,15 @@ class Domicilio {
     }
 
     public function guardar() {
-        $sql = "INSERT INTO Domicilio (id_domicilio, calle, altura, piso, "
-             . "manzana, id_persona) VALUES (NULL, '$this->_calle', "
-             . "$this->_altura, '$this->_piso', '$this->_manzana', $this->_idPersona, $this->_idBarrio)";
+        $sql = "INSERT INTO Domicilio (id_domicilio, numero_casa, calle, piso, "
+             . "manzana, id_persona, id_barrio) VALUES (NULL, $this->_numeroCasa, '$this->_calle', "
+             . "'$this->_piso', '$this->_manzana', $this->_idPersona, $this->_idBarrio)";
 
         $mysql = new MySQL();
         $mysql->insertar($sql);
         $mysql->desconectar();
+        echo $sql;
+        exit;
     }
 
     public function actualizar() {

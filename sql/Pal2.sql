@@ -174,10 +174,9 @@ CREATE TABLE IF NOT EXISTS `Barrio` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Domicilio` (
   `id_domicilio` INT NOT NULL,
-  `descripcion` VARCHAR(45) NOT NULL,
-  `manzana` INT NULL,
-  `calle` VARCHAR(45) NULL,
-  `numero_casa` INT NULL,
+  `manzana` VARCHAR(50) NOT NULL NULL,
+  `calle` VARCHAR(45) NOT NULL NULL,
+  `numero_casa` INT NOT NULL,
   `torre` VARCHAR(45) NULL,
   `piso` VARCHAR(45) NULL,
   `sector` VARCHAR(45) NULL,
@@ -299,7 +298,7 @@ ALTER TABLE `Usuario`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `Funcion`
 MODIFY `id_funcion` int(11) NOT NULL AUTO_INCREMENT;
-select * from empleado_funcion;
+
 /*SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;*/

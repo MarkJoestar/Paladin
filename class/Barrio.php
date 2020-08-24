@@ -52,7 +52,7 @@ class Barrio {
     }
     public static function obtenerPorId($id) {
 
-        $sql = "SELECT * FROM barrio WHERE id_barrio =" . $id;
+        $sql = "SELECT * FROM Barrio WHERE id_barrio =" . $id;
 
 
         $mysql = new MySQL();
@@ -64,17 +64,16 @@ class Barrio {
 
 
         $barrio = new Barrio($registro['descripcion']);
-        $barrio->_idBrrio = $registro['id_barrio'] ;
+        $barrio->_idBarrio = $registro['id_barrio'] ;
         return $barrio;
     }
-
 
 
     private function _generarListadoBarrios($datos) {
         $listado = array();
         while ($registro = $datos->fetch_assoc()) {
             $barrio = new barrio($registro['descripcion']);
-            $barrio->_idbarrio = $registro['id_barrio'];
+            $barrio->_idBarrio = $registro['id_barrio'];
             $listado[] = $barrio;
         }
         return $listado;

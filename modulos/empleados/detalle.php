@@ -25,15 +25,20 @@ $empleado = Empleado::obtenerPorId($id);
 		<?php echo $funcion->getDescripcion(); ?>
 
 	<?php endforeach ?>
-    <?php if (is_null($empleado->domicilio)) : ?>
-    	<a href="/Paladin/modulos/domicilios/alta.php?idPersona=<?php echo $empleado->getIdPersona(); ?>&idEmpleado=<?php echo $empleado->getIdEmpleado(); ?>&modulo=empleados">
-    		<i class="fas fa-plus-circle"></i> Agregar
-    	</a>
-    <?php else: ?>
-     <?php echo $empleado->domicilio; ?>
-     <a href="/Paladin/modulos/domicilios/actualizar.php?idDomicilio=<?php echo $empleado->domicilio->getIdDomicilio(); ?>&idPersona=<?php echo $empleado->getIdPersona(); ?>&idEmpleado=<?php echo $empleado->getIdEmpleado(); ?>">
-     	<i class="fas fa-edit" title="Editar dirección"></i>
-     </a>
+    <?php
+
+    if (is_null($empleado->domicilio)) : ?>    
+
+        <a href="/PaladinC/modulos/domicilios/alta.php?idPersona=<?php echo $empleado->getIdPersona(); ?>&idLlamada=<?php echo $empleado->getIdEmpleado(); ?>&modulo=empleados">
+            Agregar Domiclio
+        </a>
+    <?php else:?>
+
+        <?php echo $empleado->domicilio; ?>
+        <a href="/PaladinC/modulos/domicilios/modificar.php?idDomicilio=<?php echo $empleado->domicilio->getIdDomicilio(); ?>">
+            Modificar Domicilio
+        </a>
+
     <?php endif ?>
 
 </div>

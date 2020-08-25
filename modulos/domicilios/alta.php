@@ -5,8 +5,9 @@ require_once "../../class/Barrio.php";
 $listadoBarrio = Barrio::obtenerTodos();
 
 $idPersona = $_GET['idPersona'];
-$idEmpleado = $_GET['idEmpleado'];
+$idLlamada = $_GET['idLlamada'];
 $moduloLlamada = $_GET['modulo'];
+
 
 ?>
 <!DOCTYPE html>
@@ -46,8 +47,8 @@ $moduloLlamada = $_GET['modulo'];
 
 		<form name="frmDatos" method="POST" action="procesar/guardar.php">
             <input type="hidden" name="txtIdPersona" value='<?php echo $idPersona ?>'>
-            <input type="hidden" name="txtIdEmpleado" value='<?php echo $idEmpleado ?>'>
             <input type="hidden" name="txtModulo" value='<?php echo $moduloLlamada ?>'>
+            <input type="hidden" name="txtIdLlamada" value='<?php echo $idLlamada ?>'>
 
 	        <label><div class="titulo">Calle:</div></label>
 		    <input type="text" name="txtCalle" class="forma" id="txtCalle">
@@ -72,16 +73,6 @@ $moduloLlamada = $_GET['modulo'];
             <label><div class="titulo">Sector:</div></label>
             <input type="text" class="forma" name="txtSector" id="txtSector">
             <br><br> 
-            <label><div class="titulo">Barrio:</div></label>
-            <select name="cboBarrio" class="forma">
-                <option value="0">Seleccionar</option>
-                <?php foreach ($listadoBarrio as $barrio): ?>
-                    <option value="<?php echo $barrio->getIdBarrio(); ?>">
-                    <?php echo $barrio; ?>
-                    </option>
-                    <?php endforeach ?>
-                </select>
-                <br><br>
 
 		    <input type="submit" name="btnGuardar" value="Guardar" onclick="validarDatos();">			
 		</form></div><br><br><br><br><br><br><br>

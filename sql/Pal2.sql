@@ -181,7 +181,7 @@ CREATE TABLE IF NOT EXISTS `Domicilio` (
   `piso` VARCHAR(45) NULL,
   `sector` VARCHAR(45) NULL,
   `id_persona` INT NOT NULL,
-  `id_barrio` INT NOT NULL,
+  /*`id_barrio` INT NOT NULL,*/
   PRIMARY KEY (`id_domicilio`)
   );
 -- -----------------------------------------------------
@@ -298,6 +298,9 @@ ALTER TABLE `Usuario`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `Funcion`
 MODIFY `id_funcion` int(11) NOT NULL AUTO_INCREMENT;
+select * from domicilio;
+delete from domicilio where id_domicilio >0;
+
 
 /*SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

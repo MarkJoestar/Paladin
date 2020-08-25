@@ -28,7 +28,7 @@ class Empleado extends Persona {
         return $this;
     }
     public function getFunciones(){
-        $this->_arrFunciones;
+        return $this->_arrFunciones;
     }
 
 

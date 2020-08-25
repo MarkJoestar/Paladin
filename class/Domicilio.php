@@ -13,7 +13,7 @@ class Domicilio {
     private $_numeroCasa;
     private $_sector;
 	private $_idPersona;
-    private $_idBarrio;
+    //private $_idBarrio;
 
 
     public function getIdDomicilio()
@@ -114,7 +114,7 @@ class Domicilio {
         return $this;
     }
 
-    public function getIdBarrio()
+    /*public function getIdBarrio()
     {
         return $this->_idBarrio;
     }
@@ -124,7 +124,7 @@ class Domicilio {
         $this->_idBarrio = $_idBarrio;
 
         return $this;
-    }
+    }*/
 
     public static function obtenerPorIdPersona($idPersona) {
     	$sql = "SELECT * FROM domicilio WHERE id_persona = " . $idPersona;
@@ -145,7 +145,7 @@ class Domicilio {
 	    	$domicilio->_piso = $data['piso'];
 	    	$domicilio->_manzana = $data['manzana'];
 	    	$domicilio->_idPersona = $data['id_persona'];
-            $domicilio->_idBarrio = $data['id_barrio'];
+            //$domicilio->_idBarrio = $data['id_barrio'];
 	    }
 
     	return $domicilio;
@@ -153,14 +153,14 @@ class Domicilio {
 
     public function guardar() {
         $sql = "INSERT INTO Domicilio (id_domicilio, numero_casa, calle, piso, "
-             . "manzana, id_persona, id_barrio) VALUES (NULL, $this->_numeroCasa, '$this->_calle', "
-             . "'$this->_piso', '$this->_manzana', $this->_idPersona, $this->_idBarrio)";
+             . "manzana, id_persona) VALUES (NULL, $this->_numeroCasa, '$this->_calle', "
+             . "'$this->_piso', '$this->_manzana', $this->_idPersona)";
 
         $mysql = new MySQL();
         $mysql->insertar($sql);
         $mysql->desconectar();
-        echo $sql;
-        exit;
+        //echo $sql;
+        //exit;
     }
 
     public function actualizar() {

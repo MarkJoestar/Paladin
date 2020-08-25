@@ -50,7 +50,7 @@ $domicilio->setIdPersona($idPersona);
 $domicilio->guardar();
 
 //highlight_string(var_export($domicilio, true));
-header("location: /PaladinC/modulos/$modulo/detalle.php?id=$idLlamada");
+header("location: /Paladin/modulos/$modulo/detalle.php?id=$idLlamada");
 
 
 ?>

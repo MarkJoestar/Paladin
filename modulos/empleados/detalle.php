@@ -3,6 +3,8 @@ require_once '../../class/Empleado.php';
 
 $id = $_GET['id'];
 $empleado = Empleado::obtenerPorId($id);
+/*highlight_string(var_export($empleado, true));
+exit;*/
 
 ?>
 <!DOCTYPE html>
@@ -19,12 +21,15 @@ $empleado = Empleado::obtenerPorId($id);
 	<?php echo $empleado->getNumeroDocumento();?>
 	<br><br>
 	<?php echo $empleado->getFechaNacimiento();?>
+    <br><br>
+    <?php echo $empleado->getSueldo();?>
 	<br><br>
 	<?php foreach ($empleado->getFunciones() as $funcion): ?>
 
 		<?php echo $funcion->getDescripcion(); ?>
 
 	<?php endforeach ?>
+    <br><br>
     <?php
 
     if (is_null($empleado->domicilio)) : ?>    
@@ -35,7 +40,7 @@ $empleado = Empleado::obtenerPorId($id);
     <?php else:?>
 
         <?php echo $empleado->domicilio; ?>
-        <a href="/Paladin/modulos/domicilios/modificar.php?idDomicilio=<?php echo $empleado->domicilio->getIdDomicilio(); ?>">
+        <a href="/Paladin/modulos/domicilios/modificar.php?idDomicilio=<?php echo $empleado->domicilio->getIdDomicilio(); ?>&idPersona=<?php echo $empleado->getIdPersona(); ?>&idLlamada=<?php echo $empleado->getIdEmpleado(); ?>">
             Modificar Domicilio
         </a>
 

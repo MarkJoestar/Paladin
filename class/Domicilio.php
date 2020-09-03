@@ -12,8 +12,9 @@ class Domicilio {
 	private $_manzana;
     private $_numeroCasa;
     private $_sector;
+    private $_descripcion;
 	private $_idPersona;
-    //private $_idBarrio;
+    //public $barrio;
 
 
     public function getIdDomicilio()
@@ -102,6 +103,18 @@ class Domicilio {
         return $this;
     }
 
+    public function getDescripcion()
+    {
+        return $this->_descripcion;
+    }
+
+    public function setDescripcion($_descripcion)
+    {
+        $this->_descripcion = $_descripcion;
+
+        return $this;
+    }
+
     public function getIdPersona()
     {
         return $this->_idPersona;
@@ -145,7 +158,7 @@ class Domicilio {
 	    	$domicilio->_piso = $data['piso'];
 	    	$domicilio->_manzana = $data['manzana'];
 	    	$domicilio->_idPersona = $data['id_persona'];
-            //$domicilio->_idBarrio = $data['id_barrio'];
+            //$domicilio->setBarrio();
 	    }
 
     	return $domicilio;
@@ -153,8 +166,8 @@ class Domicilio {
 
     public function guardar() {
         $sql = "INSERT INTO Domicilio (id_domicilio, numero_casa, calle, piso, "
-             . "manzana, id_persona) VALUES (NULL, $this->_numeroCasa, '$this->_calle', "
-             . "'$this->_piso', '$this->_manzana', $this->_idPersona)";
+             . "manzana, sector, id_persona) VALUES (NULL, $this->_numeroCasa, '$this->_calle', "
+             . "'$this->_piso', '$this->_manzana', '$this->_sector' $this->_idPersona)";
 
         $mysql = new MySQL();
         $mysql->insertar($sql);
@@ -165,9 +178,11 @@ class Domicilio {
 
     public function actualizar() {
 
-    $sql = "UPDATE Domicilio SET calle = '$this->_calle' WHERE id_domicilio = $this->_idDomicilio";
+    $sql = "UPDATE Domicilio SET calle = '$this->_calle', piso = '$this->_piso', numero_casa = '$this->_numeroCasa', manzana = '$this->_manzana', sector = '$this->_sector' WHERE id_domicilio = $this->_idDomicilio";
     $mysql = new MySQL();
     $mysql->actualizar($sql);
+    //echo $sql;
+    //exit;
     }
 
     public function eliminar(){
@@ -178,7 +193,7 @@ class Domicilio {
     }
 
     public function __toString() {
-    	return $this->_calle . " " . $this->_piso;
+    	return $this->_calle . " " . $this->_manzana . " " . $this->_numeroCasa . " " . $this->_sector . " " . $this->_piso;
     }
 }
 

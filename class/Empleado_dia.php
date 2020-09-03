@@ -3,7 +3,7 @@ require_once 'MySQL.php';
 require_once 'Empleado.php';
 
 class EmpleadoDia{
-	private $_idEmpleado;
+	private $_idEmpleadoDia;
 	private $_lunes;
     private $_martes;
     private $_miercoles;
@@ -12,9 +12,9 @@ class EmpleadoDia{
     private $_sabado;
     private $_domingo;
 
-	public function getIdEmpleado()
+	public function getIdEmpleadoDia()
     {
-        return $this->_idEmpleado; 
+        return $this->_idEmpleadoDia;
     }
 
     public function getLunes()
@@ -67,7 +67,7 @@ class EmpleadoDia{
         return $this->_viernes;
     }
 
-    public function setViernes($_sabado)
+    public function setViernes($_viernes)
     {
         $this->_viernes = $_viernes;
 
@@ -80,7 +80,7 @@ class EmpleadoDia{
 
     public function setSabado($_sabado)
     {
-        $this->_sabado = $sabado;
+        $this->_sabado = $_sabado;
 
         return $this;
     }
@@ -95,6 +95,75 @@ class EmpleadoDia{
 
         return $this;
     }
+
+        public static function obtenerTodos() {
+        $sql = "SELECT * FROM EmpleadoDia";
+
+        $mysql = new MySQL();
+        $datos = $mysql->consultar($sql);
+        $mysql->desconectar();
+
+        $listado = self::_generarListadoEmpleadoDia($datos);
+
+        return $listado;
+    }
+        private function _generarEmpleadoDia($datos) {
+        $empleadoDia = new EmpleadoDia();
+        $empleadoDia->_idEmpleadoDia = $data['id_emlpeado_dia'];
+        $empleadoDia->_lunes = $data['lunes'];
+        $empleadoDia->_martes = $data['martes'];
+        $empleadoDia->_miercoles = $data['miercoles'];
+        $empleadoDia->_jueves = $data['jueves'];
+        $empleadoDia->_viernes = $data['viernes'];
+        $empleadoDia->_sabado = $data['sabado'];
+        $empleadoDia->_domingo = $data['domingo'];
+        return $empleadoDia;
+    }
+
+    private function _generarListadoEmpleadoDia($datos) {
+        $listado = array();
+        while ($registro = $datos->fetch_assoc()) {
+            $empleadoDia = new EmpleadoDia();
+            $empleadoDia->_idEmpleadoDia = $registro['id_emlpeado_dia'];
+            $empleadoDia->_lunes = $registro['lunes'];
+            $empleadoDia->_martes = $registro['martes'];
+            $empleadoDia->_miercoles = $registro['miercoles'];
+            $empleadoDia->_jueves = $registro['jueves'];
+            $empleadoDia->_viernes = $registro['viernes'];
+            $empleadoDia->_sabado = $registro['sabado'];
+            $empleadoDia->_domingo = $registro['domingo'];
+            $listado[] = $empleadoDia;
+        }
+        return $listado;
+    }
+
+
+    public static function obtenerPorId($id) {
+
+        $sql = "SELECT * FROM EmpleadoDia WHERE id_emlpeado_dia =" . $id;
+
+
+        $mysql = new MySQL();
+        $datos = $mysql->consultar($sql);
+        $mysql->desconectar();
+
+
+        $registro = $datos->fetch_assoc();
+
+
+        $empleadoDia = new EmpleadoDia();
+        $empleadoDia->_idEmpleadoDia = $registro['id_emlpeado_dia'];
+        $empleadoDia->_lunes = $registro['lunes'];
+        $empleadoDia->_martes = $registro['martes'];
+        $empleadoDia->_miercoles = $registro['miercoles'];
+        $empleadoDia->_jueves = $registro['jueves'];
+        $empleadoDia->_viernes = $registro['viernes'];
+        $empleadoDia->_sabado = $registro['sabado'];
+        $empleadoDia->_domingo = $registro['domingo'];
+        return $empleadoDia;
+
+    }
+
     public function guardar() {
 
         $sql = "INSERT INTO EmpleadoDia (id_emlpeado_dia, lunes, martes, miercoles, jueves, viernes, sabado, domingo) "
@@ -103,11 +172,13 @@ class EmpleadoDia{
         $mysql = new MySQL();
         $idInsertado = $mysql->insertar($sql);
 
-        $this->_idUsuario = $idInsertado;
+        $this->_idEmpleadoDia = $idInsertado;
+        echo $sql;
+        exit;
     }
     public function actualizar() {
 
-        $sql = "UPDATE Usuario SET (id_emlpeado_dia, lunes, martes, miercoles, jueves, viernes, sabado, domingo) = '($this->_lunes, $this->_martes, $this->_miercoles, $this->_jueves, $this->_viernes, $this->_sabado, $this->_domingo)' WHERE id_funcion = $this->_idFuncion";
+        $sql = "UPDATE EmpleadoDia SET (id_emlpeado_dia, lunes, martes, miercoles, jueves, viernes, sabado, domingo) = '($this->_lunes, $this->_martes, $this->_miercoles, $this->_jueves, $this->_viernes, $this->_sabado, $this->_domingo)' WHERE id_emlpeado_dia = $this->_idEmpleadoDia";
         $mysql = new MySQL();
         $mysql->actualizar($sql);
     }

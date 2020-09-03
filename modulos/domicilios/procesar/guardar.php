@@ -23,17 +23,6 @@ if (empty(trim($calle))) {
 	exit;
 }
 
-if (empty(trim($manzana))) {
-	echo "ERROR MANZANA VACIO";
-	header("location: ../alta.php");
-	exit;
-}
-
-if (empty(trim($numeroCasa))) {
-	echo "ERROR NUMERO DE CASA VACIO";
-	header("location: ../alta.php");
-	exit;
-}
 
 
 

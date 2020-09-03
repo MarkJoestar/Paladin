@@ -26,6 +26,8 @@
 			<label><div class="titulo"> Descripcion:</div></label>
 		    <input type="text" class="forma" name="txtDescripcion" id="txtDescripcion">
 			<br><br>
+            Imagen: <input type="file" name="fileImagen">
+            <br><br>
 		    <input type="submit" name="btnGuardar" value="Guardar" onclick="validarDatos();">			
 		</form></div>
 </body>

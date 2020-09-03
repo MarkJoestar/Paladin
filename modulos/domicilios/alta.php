@@ -25,17 +25,6 @@ $moduloLlamada = $_GET['modulo'];
                     return;
                 }
 
-                var numeroCasa = document.getElementById("txtNumeroCasa").value;
-                if (numeroCasa.trim() == "") {
-                    alert("El numero de casa no debe estar vacio");
-                    return;
-                }
-
-                var manzana = document.getElementById("txtManzana").value;
-                if (manzana.trim() == "") {
-                    alert("La manzana no debe estar vacio");
-                    return;
-                }
                 var form = document.getElementById("frmDatos");
                 form.submit();
             }

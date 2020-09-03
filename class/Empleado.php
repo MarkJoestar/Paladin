@@ -16,7 +16,7 @@ class Empleado extends Persona {
 		return $this->_idEmpleado; 
 	}
 
-    public function getSueldo($_sueldo)
+    public function getSueldo()
     {
         return $this->_sueldo; 
     }
@@ -67,6 +67,8 @@ class Empleado extends Persona {
         $empleado->_fechaNacimiento = $registro['fecha_nacimiento'];
         $empleado->_sueldo = $registro['sueldo'];
         $empleado->_arrFunciones = Funcion::obtenerFuncionesPorIdEmpleado($empleado->_idEmpleado);
+        $empleado->setDomicilio();
+
 
         return $empleado;
     }
@@ -140,6 +142,8 @@ class Empleado extends Persona {
         $sql = "DELETE FROM empleado WHERE id_empleado = $this->_idEmpleado";
         $mysql = new MySQL();
         $mysql->eliminar($sql);
+        echo $sql;
+        exit;
     }
 
     public function __ToString(){

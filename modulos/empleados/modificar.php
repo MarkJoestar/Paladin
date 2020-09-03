@@ -1,10 +1,12 @@
 <?php
 
 require_once '../../class/Empleado.php';
+require_once '../../class/Funcion.php';
 
-$id = $_GET['id'];
+$idEmpleado = $_GET['id'];
 
-$empleado = Empleado::obtenerPorId($id);
+$empleado = Empleado::obtenerPorId($idEmpleado);
+$listadoFunciones = Funcion::obtenerTodos();
 
 ?>
 
@@ -75,9 +77,25 @@ $empleado = Empleado::obtenerPorId($id);
 		    <label><div class="titulo">Numero Documento:</div></label>
 		    <input type="text" name="txtNumeroDocumento" class="forma" id="txtNumeroDocumento" value="<?php echo $empleado->getNumeroDocumento(); ?>">
 			<br><br> <!-- Salto de lineas -->
-			<label><div class="titulo">Sueldo:</div></label>
-		    <input type="text" name="txtSueldo" class="forma" value="<?php echo $empleado->getSueldo(); ?>">
-		    <br><br>
+            <label><div class="titulo">Sueldo:</div></label>
+            <input type="text" name="txtSueldo" class="forma" id="txtSueldo" value="<?php echo $empleado->getSueldo(); ?>">
+            <br><br>
+            <select name="cboFunciones[]" multiple style="width: 250px; height: 250px;" class="forma" >
+
+                 <?php foreach ($listadoFunciones as $funcion) :?>
+                    <?php
+                    $selected = '';
+                    $idFuncion = $funcion->getIdFuncion();
+                    if ($empleado->tieneFuncion($idFuncion)) {
+                        $selected = "SELECTED";
+                    }
+                    ?>
+                    <option value="<?php echo $funcion->getIdFuncion(); ?>" <?php echo $selected ?> >
+                        <?php echo $funcion ?>
+                    </option>
+                 <?php endforeach ?>
+            </select>
+            <br><br>
 		    <input type="submit" name="btnGuardar" value="Actualizar" onclick="validarDatos();">			
 		</form>
 	</div>

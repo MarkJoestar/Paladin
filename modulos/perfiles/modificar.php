@@ -41,7 +41,6 @@ $listadoModulos = Modulo::obtenerTodos();
     <br>
     <br>
 
-    <h4>Modificacion de Perfil</h4>
     <br>
 
         <form name="frmDatos" method="POST" action="procesar/modificar.php">

@@ -299,7 +299,7 @@ ALTER TABLE `Usuario`
 ALTER TABLE `Funcion`
 MODIFY `id_funcion` int(11) NOT NULL AUTO_INCREMENT;
 select * from domicilio;
-delete from domicilio where id_domicilio >0;
+delete from empleado where id_domicilio >5;
 
 
 /*SET SQL_MODE=@OLD_SQL_MODE;

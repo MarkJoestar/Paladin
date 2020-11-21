@@ -1,6 +1,6 @@
 <?php
 
-require_once "../../class/Usuario.php";
+require_once "../../../class/Usuario.php";
 
 $id = $_GET['id'];
 

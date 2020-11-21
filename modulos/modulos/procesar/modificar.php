@@ -8,7 +8,7 @@ $nombre = $_POST['txtNombre'];
 
 if (empty(trim($nombre))) {
 	echo "ERROR NOMBRE VACIO";
-	header("location: ../alta.php");
+	header("location: ../modificar.php");
 	exit;
 }
 

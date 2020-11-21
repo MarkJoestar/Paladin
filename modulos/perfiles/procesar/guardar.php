@@ -3,7 +3,7 @@ require_once "../../../class/Perfil.php";
 require_once '../../../class/PerfilModulo.php';
 
 $nombre = $_POST['txtNombre'];
-$listaModulos = $_POST['cboModulos'];
+$listadoModulos = $_POST['cboModulos'];
 
 if (empty(trim($nombre))) {
 	echo "ERROR NOMBRE VACIO";
@@ -15,7 +15,7 @@ $perfil = new Perfil($nombre);
 
 $perfil->guardar();
 
-foreach ($listaModulos as $modulo_id) {
+foreach ($listadoModulos as $modulo_id) {
 	$perfilModulo = new PerfilModulo();
 	$perfilModulo->setIdPerfil($perfil->getIdPerfil());
 	$perfilModulo->setIdModulo($modulo_id);

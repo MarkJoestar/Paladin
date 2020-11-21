@@ -1,5 +1,8 @@
 <?php  
+require_once "../../../config.php";
 require_once "../../../class/Usuario.php";
+//require_once "../../../class/FotoPerfil.php";
+
 
 $username = $_POST['txtUsername'];
 $password = $_POST['txtPassword'];
@@ -8,6 +11,8 @@ $apellido = $_POST['txtApellido'];
 $fechaNacimiento = $_POST['txtFechaNacimiento'];
 $tipoDocumento = $_POST['cboTipoDocumento'];
 $numeroDocumento = $_POST['txtNumeroDocumento'];
+$imagen = $_FILES['fileImagen'];
+
 
 if (empty(trim($username))) {
 	echo "ERROR USUARIO VACIO";
@@ -47,13 +52,23 @@ if (empty(trim($numeroDocumento))) {
 	exit;
 }
 
-if ((int) $tipoDocumento == 0) {
+/*if ((int) $tipoDocumento == 0) {
 	echo"Debe seleccionar el un tipo de documento";
 	header("location: ../alta.php");
 	exit;
-}
+}*/
 
+$extension = pathinfo($imagen['name'], PATHINFO_EXTENSION);
 
+$nombreSinEspacios = str_replace(" ", "_", $imagen['name']);
+
+$fechaHora = date("dmYHis");
+
+$nombreImagen = $fechaHora . "_" . $nombreSinEspacios;
+
+$rutaImagen = "../../../imagenes/" . $nombreImagen;
+
+move_uploaded_file($imagen['tmp_name'], $rutaImagen);
 
 $usuario = new Usuario($nombre, $apellido);
 $usuario->setUsername($username);
@@ -61,9 +76,8 @@ $usuario->setPassword($password);
 $usuario->setFechaNacimiento($fechaNacimiento);
 $usuario->setIdTipoDocumento($tipoDocumento);
 $usuario->setNumeroDocumento($numeroDocumento);
-
+$usuario->setImagenPerfil($nombreImagen);
 $usuario->guardar();
-
 
 //highlight_string(var_export($usuario, true));
 header('Location: ../listado.php?mensaje=1');

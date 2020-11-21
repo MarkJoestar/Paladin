@@ -54,6 +54,8 @@ class PerfilModulo {
         $idInsertado = $mysql->insertar($sql);
 
         $this->_idPerfilModulo = $idInsertado;
+        //echo $sql;
+        //exit;
     }
 
 }

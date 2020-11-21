@@ -5,7 +5,7 @@ class MySQL {
 	private $_mysqli;
 
 	public function __construct() {
-		$this->_mysqli = new mysqli('localhost', 'root', '', 'ejemplo_imagenes');
+		$this->_mysqli = new mysqli('localhost', 'root', '', 'Paladin1');
 	}
 
 	public function insertar($sql) {

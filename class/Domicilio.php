@@ -12,7 +12,7 @@ class Domicilio {
 	private $_manzana;
     private $_numeroCasa;
     private $_sector;
-    private $_descripcion;
+    //private $_descripcion;
 	private $_idPersona;
     //public $barrio;
 
@@ -167,13 +167,13 @@ class Domicilio {
     public function guardar() {
         $sql = "INSERT INTO Domicilio (id_domicilio, numero_casa, calle, piso, "
              . "manzana, sector, id_persona) VALUES (NULL, $this->_numeroCasa, '$this->_calle', "
-             . "'$this->_piso', '$this->_manzana', '$this->_sector' $this->_idPersona)";
+             . "'$this->_piso', '$this->_manzana', '$this->_sector', $this->_idPersona)";
 
         $mysql = new MySQL();
         $mysql->insertar($sql);
         $mysql->desconectar();
-        //echo $sql;
-        //exit;
+        echo $sql;
+        exit;
     }
 
     public function actualizar() {

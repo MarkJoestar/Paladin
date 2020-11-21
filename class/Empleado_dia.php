@@ -109,7 +109,7 @@ class EmpleadoDia{
     }
         private function _generarEmpleadoDia($datos) {
         $empleadoDia = new EmpleadoDia();
-        $empleadoDia->_idEmpleadoDia = $data['id_emlpeado_dia'];
+        $empleadoDia->_idEmpleadoDia = $data['id_empleado_dia'];
         $empleadoDia->_lunes = $data['lunes'];
         $empleadoDia->_martes = $data['martes'];
         $empleadoDia->_miercoles = $data['miercoles'];
@@ -124,7 +124,7 @@ class EmpleadoDia{
         $listado = array();
         while ($registro = $datos->fetch_assoc()) {
             $empleadoDia = new EmpleadoDia();
-            $empleadoDia->_idEmpleadoDia = $registro['id_emlpeado_dia'];
+            $empleadoDia->_idEmpleadoDia = $registro['id_empleado_dia'];
             $empleadoDia->_lunes = $registro['lunes'];
             $empleadoDia->_martes = $registro['martes'];
             $empleadoDia->_miercoles = $registro['miercoles'];
@@ -140,7 +140,7 @@ class EmpleadoDia{
 
     public static function obtenerPorId($id) {
 
-        $sql = "SELECT * FROM EmpleadoDia WHERE id_emlpeado_dia =" . $id;
+        $sql = "SELECT * FROM EmpleadoDia WHERE id_empleado_dia =" . $id;
 
 
         $mysql = new MySQL();
@@ -152,7 +152,7 @@ class EmpleadoDia{
 
 
         $empleadoDia = new EmpleadoDia();
-        $empleadoDia->_idEmpleadoDia = $registro['id_emlpeado_dia'];
+        $empleadoDia->_idEmpleadoDia = $registro['id_empleado_dia'];
         $empleadoDia->_lunes = $registro['lunes'];
         $empleadoDia->_martes = $registro['martes'];
         $empleadoDia->_miercoles = $registro['miercoles'];
@@ -166,25 +166,27 @@ class EmpleadoDia{
 
     public function guardar() {
 
-        $sql = "INSERT INTO EmpleadoDia (id_emlpeado_dia, lunes, martes, miercoles, jueves, viernes, sabado, domingo) "
+        $sql = "INSERT INTO EmpleadoDia (id_empleado_dia, lunes, martes, miercoles, jueves, viernes, sabado, domingo) "
              . "VALUES (NULL, $this->_lunes, $this->_martes, $this->_miercoles, $this->_jueves, $this->_viernes, $this->_sabado, $this->_domingo)";
 
         $mysql = new MySQL();
         $idInsertado = $mysql->insertar($sql);
 
         $this->_idEmpleadoDia = $idInsertado;
-        echo $sql;
-        exit;
+        //echo $sql;
+        //exit;
     }
     public function actualizar() {
 
-        $sql = "UPDATE EmpleadoDia SET (id_emlpeado_dia, lunes, martes, miercoles, jueves, viernes, sabado, domingo) = '($this->_lunes, $this->_martes, $this->_miercoles, $this->_jueves, $this->_viernes, $this->_sabado, $this->_domingo)' WHERE id_emlpeado_dia = $this->_idEmpleadoDia";
+        $sql = "UPDATE EmpleadoDia SET lunes = $this->_lunes, martes = $this->_martes, miercoles = $this->_miercoles, jueves = $this->_jueves, viernes = $this->_viernes, sabado = $this->_sabado, domingo = $this->_domingo WHERE id_empleado_dia = $this->_idEmpleadoDia";
         $mysql = new MySQL();
         $mysql->actualizar($sql);
+        //echo $sql;
+        //exit;
     }
     public function eliminar() {
 
-        $sql = "DELETE  FROM EmpleadoDia WHERE id_emlpeado_dia = $this->_idEmpleadoDia";
+        $sql = "DELETE  FROM EmpleadoDia WHERE id_empleado_dia = $this->_idEmpleadoDia";
         $mysql = new MySQL();
         $mysql->eliminar($sql);
     }

@@ -55,10 +55,10 @@ $listadoHorario = Horario::obtenerTodos();
 			<th><div class="columna">Acciones</div></th>
 		</tr>
 
-		<?php foreach ($listadohorario as $horario): ?>
+		<?php foreach ($listadoHorario as $horario): ?>
 
 			<tr>
-				<td><div class="dato"> <?php echo $horario->getHoraEntrada(); ?> </td>
+				<td><div class="dato"> <?php echo $horario->getHoraIngreso(); ?> </td>
 				<td><div class="dato"> <?php echo $horario->getHoraSalida(); ?> </td>
 				<td><a href="detalle.php?id=<?php echo $horario->getIdHorario()?>"><img src="../../imagenes/detalle.png"></a>
 				<a href="modificar.php?id=<?php echo $horario->getIdHorario()?>"><img src="../../imagenes/ajustes.png"></a>

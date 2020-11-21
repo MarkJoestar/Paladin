@@ -1,29 +1,130 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Nuevo Empleado-Dia</title>
-	<link rel="stylesheet" type="text/css" href="../../style.css">
+    <title>Nuevo Empleado-dia</title>
+        <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Forms</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="../../static/CoolAdmin/css/font-face.css" rel="stylesheet" media="all">
+    <link href="../../static/CoolAdmin/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="../../static/CoolAdmin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="../../static/CoolAdmin/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="../../static/CoolAdmin/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="../../static/CoolAdmin/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="../../static/CoolAdmin/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="../../static/CoolAdmin/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="../../static/CoolAdmin/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="../../static/CoolAdmin/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="../../static/CoolAdmin/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="../../static/CoolAdmin/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="../../static/CoolAdmin/css/theme.css" rel="stylesheet" media="all">
 </head>
-<body>
+<body class="animsition">
     <?php require_once "../../menu.php"; ?>
-    <div class="container">
-  <form name="frmDatos" action="procesar/guardar.php" method="POST" target="_blank" >
-    <label><div class="titulo"> Lunes:</div></label>
-    <input type="checkbox" class="forma" name="cb-lun" value="1"/>
-    <label><div class="titulo"> Martes:</div></label>
-    <input type="checkbox" class="forma"  name="cb-mar" value="1"/>
-    <label><div class="titulo"> Miercoles:</div></label>
-    <input type="checkbox" class="forma" name="cb-mie" value="1"/>
-    <label><div class="titulo"> Jueves:</div></label>
-    <input type="checkbox" class="forma" name="cb-jue" value="1"/>
-    <label><div class="titulo"> Viernes:</div></label>
-    <input type="checkbox" class="forma" name="cb-vie" value="1"/>
-    <label><div class="titulo"> Sabado:</div></label>
-    <input type="checkbox" class="forma" name="cb-sab" value="1"/>
-    <label><div class="titulo"> Domingo:</div></label>
-    <input type="checkbox" class="forma" name="cb-dom" value="1"/>
-    <br>
-    <input type="submit" id="submit" name="submit"  />
-    </form></div>
+    <div class="page-wrapper">
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong>Empleado-Dia/s</strong> Alta
+                                    </div>
+                                    <div class="card-body card-block">
+                                        <form id="frmDatos" name="frmDatos" action="procesar/guardar.php" method="POST" enctype="multipart/form-data" class="form-horizontal">
+
+                                            <div class="form-check">
+                                                <div class="checkbox">
+                                                    <label class="form-check-label ">
+                                                        <input type="checkbox" id="chkLunes" name="chkLunes" class="form-check-input"> Lunes
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label class="form-check-label ">
+                                                        <input type="checkbox" id="chkMartes" name="chkMartes" class="form-check-input"> Martes
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label class="form-check-label ">
+                                                        <input type="checkbox" id="chkMiercoles" name="chkMiercoles" class="form-check-input"> Miercoles
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label class="form-check-label ">
+                                                        <input type="checkbox" id="chkJueves" name="chkJueves" class="form-check-input"> Jueves
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label class="form-check-label ">
+                                                        <input type="checkbox" id="chkViernes" name="chkViernes" class="form-check-input"> Viernes
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label class="form-check-label ">
+                                                        <input type="checkbox" id="chkSabado" name="chkSabado" class="form-check-input"> Sabado
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label class="form-check-label ">
+                                                        <input type="checkbox" id="chkDomingo" name="chkDomingo" class="form-check-input"> Domingo
+                                                    </label>
+                                                </div>
+                                                <div class="form-actions form-group">
+                                                    <button type="submit" class="btn btn-success btn-sm">Guardar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="../../static/CoolAdmin/vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="../../static/CoolAdmin/vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="../../static/CoolAdmin/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="../../static/CoolAdmin/vendor/slick/slick.min.js">
+    </script>
+    <script src="../../static/CoolAdmin/vendor/wow/wow.min.js"></script>
+    <script src="../../static/CoolAdmin/vendor/animsition/animsition.min.js"></script>
+    <script src="../../static/CoolAdmin/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
+    <script src="../../static/CoolAdmin/vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="../../static/CoolAdmin/vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="../../static/CoolAdmin/vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="../../static/CoolAdmin/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../../static/CoolAdmin/vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="../../static/CoolAdmin/vendor/select2/select2.min.js">
+    </script>
+
+    <!-- Main JS-->
+    <script src="../../static/CoolAdmin/js/main.js"></script>
 </body>
 </html>

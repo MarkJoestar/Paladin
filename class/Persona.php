@@ -127,10 +127,10 @@ class Persona {
         $sql = "UPDATE Persona SET nombre = '$this->_nombre', apellido = '$this->_apellido', "
              . "numero_documento = '$this->_numeroDocumento', fecha_nacimiento = '$this->_fechaNacimiento' "
              . "WHERE id_persona = $this->_idPersona";
-
-        //echo $sql;
         $mysql = new MySQL();
         $mysql->actualizar($sql);
+        //echo $sql;
+        //exit;
     }
 
     public function eliminar() {

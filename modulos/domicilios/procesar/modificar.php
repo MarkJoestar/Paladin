@@ -41,6 +41,6 @@ $domicilio->actualizar($idDomicilio);
 //highlight_string(var_export($domicilio, true));
 //exit;
 
-header("location: /Paladin/modulos/empleados/detalle.php?id=$idLlamada");
+header("location: /PaladinC/modulos/empleados/detalle.php?id=$idLlamada");
 
 ?>

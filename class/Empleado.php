@@ -3,18 +3,33 @@
 require_once 'Persona.php';
 require_once 'MySQL.php';
 require_once 'Funcion.php';
+require_once 'Horario.php';
+
 
 
 class Empleado extends Persona {
 
 	private $_idEmpleado;
     private $_sueldo;
+    private $_confirmado;
     private $_arrFunciones;
+    private $_idAsistencia;
+    private $_idHorario;
+    public $horario;
 	
 	public function getIdEmpleado()
 	{
 		return $this->_idEmpleado; 
 	}
+
+    public function getIdAsistencia()
+    {
+        return $this->_idAsistencia; 
+    }
+    public function setIdAsistencia()
+    {
+        $this->_idAsistencia = $_idAsistencia;
+    }
 
     public function getSueldo()
     {
@@ -29,6 +44,18 @@ class Empleado extends Persona {
     }
     public function getFunciones(){
         return $this->_arrFunciones;
+    }
+
+    public function setIdHorario($_idHorario)
+    {
+        $this->_idHorario = $_idHorario;
+
+        return $this;
+    }
+
+    public function getHorario()
+    {
+        return $this->horario;
     }
 
 
@@ -77,7 +104,6 @@ class Empleado extends Persona {
         private function _generarEmpleado($datos) {
         $empleado = new Empleado($data['nombre'], $data['apellido']);
         $empleado->_idEmpleado = $data['id_empleado'];
-        $empleado->_numeroLegajo = $data['numero_legajo'];
         $empleado->_idPersona = $data['id_persona'];
         $empleado->_fechaNacimiento = $data['fecha_nacimiento'];
         $empleado->_tipoDocumento = $data['id_tipo_documento'];
@@ -101,6 +127,52 @@ class Empleado extends Persona {
         }
         return $listado;
     }
+    public static function marcar($numeroDocumento) {
+        $sql = "SELECT * FROM empleado "
+             . "INNER JOIN persona on persona.id_persona = empleado.id_persona "
+             . "WHERE numero_documento = " . $numeroDocumento;
+             //. "AND persona.id_estado = 1";
+        //echo $sql;
+        //exit;
+        $mysql = new MySQL();
+        $datos = $mysql->consultar($sql);
+        $mysql->desconectar();
+
+        if ($datos->num_rows > 0) {
+            $registro = $datos->fetch_assoc();
+            $empleado = new Empleado($registro['nombre'], $registro['apellido']);
+            $empleado->_idEmpleado = $registro['id_empleado'];
+            $empleado->_idPersona = $registro['id_persona'];
+            $empleado->_fechaNacimiento = $data['fecha_nacimiento'];
+            $empleado->_tipoDocumento = $data['id_tipo_documento'];
+            $empleado->_numeroDocumento = $data['numero_documento'];
+            $empleado->_sueldo = $data['sueldo'];
+            $empleado->_confirmado = true;
+
+            //$usuario->perfil = Perfil::obtenerPorId($usuario->_idPerfil);
+            //$usuario->setDomicilio();
+        } else {
+            $empleado = new Empleado('');
+            $empleado->_confirmado = false;
+        }
+
+        return $empleado;
+    }
+    public function confirmar() {
+        return $this->_confirmado;
+    }
+
+    public function marcarEntrada(){
+        $sql = "INSERT INTO Asistencia (id_asistencia, fecha_hora_ingreso,  fecha_hora_salida, id_horario, id_empleado) "
+             . "VALUES (NULL, 'now()', null, $this->_idHorario, $this->_idEmpleado) ";
+        $mysql = new MySQL();
+        $idInsertado = $mysql->insertar($sql);
+
+        $this->_idAsistencia = $idInsertado;
+        echo $sql;
+        exit;
+    }
+
 
     public function guardar() {
         parent::guardar();
@@ -129,6 +201,8 @@ class Empleado extends Persona {
         $sql = "UPDATE empleado SET sueldo = '$this->_sueldo' WHERE id_empleado = $this->_idEmpleado";
         $mysql = new MySQL();
         $mysql->actualizar($sql);
+        //echo $sql;
+        //exit;
     }
 
     public function eliminarFunciones() {
@@ -152,6 +226,9 @@ class Empleado extends Persona {
 
     public function setFunciones() {
         $this->_arrFunciones = Funcion::obtenerPorIdEmpleado($this->_idEmpleado);
+    }
+    public function setHorario() {
+        $this->_horario = Horario::obtenerPorId($this->_idHorario);
     }
 }
 ?>

@@ -75,8 +75,6 @@ CREATE TABLE IF NOT EXISTS `Video` (
   `id_video` INT NOT NULL,
   `duracion` TIME NOT NULL,
   `fecha_hora` DATETIME NOT NULL,
-  `id_camara` INT NOT NULL,
-  `id_ubicacion` INT NOT NULL,
   PRIMARY KEY (`id_video`)
   );
 -- -----------------------------------------------------
@@ -131,11 +129,10 @@ CREATE TABLE IF NOT EXISTS `Empleado` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Horario` (
   `id_horario` INT NOT NULL,
-  `hora_ingreso` DATETIME NOT NULL,
-  `hora_salida` DATETIME NOT NULL,
-  `id_empleado` INT NOT NULL,
+  `hora_ingreso` TIME NOT NULL,
+  `hora_salida` TIME,
   PRIMARY KEY (`id_horario`)
-  );
+);
 -- -----------------------------------------------------
 -- Table `mydb`.`Funcion`
 -- -----------------------------------------------------
@@ -156,10 +153,10 @@ CREATE TABLE IF NOT EXISTS `TipoContacto` (
 -- Table `mydb`.`Persona_Contacto`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Persona_Contacto` (
-  `id_persona` INT NOT NULL,
+  `id_persona_contacto` INT NOT NULL,
   `id_tipo_contacto` INT NOT NULL,
   `valor` VARCHAR(30) NOT NULL,
-  PRIMARY KEY (`id_tipo_contacto`)
+  PRIMARY KEY (`id_persona_contacto`)
   );
 -- -----------------------------------------------------
 -- Table `mydb`.`Barrio`
@@ -200,9 +197,10 @@ CREATE TABLE IF NOT EXISTS `Asistencia` (
   `id_asistencia` INT NOT NULL,
   `fecha_hora_ingreso` DATETIME NOT NULL,
   `fecha_hora_salida` DATETIME NOT NULL,
+  `id_horario` INT NOT NULL,
   `id_empleado` INT NOT NULL,
   PRIMARY KEY (`id_asistencia`)
-  );
+);
 -- -----------------------------------------------------
 -- Table `mydb`.`Perfil`
 -- -----------------------------------------------------
@@ -218,8 +216,6 @@ CREATE TABLE IF NOT EXISTS`Usuario` (
   `id_usuario` INT NOT NULL,
   `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
-  `id_perfil` INT NOT NULL,
-  `id_empleado` INT NOT NULL,
   `id_persona` INT NOT NULL,
   PRIMARY KEY (`id_usuario`)
   );
@@ -298,10 +294,48 @@ ALTER TABLE `Usuario`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `Funcion`
 MODIFY `id_funcion` int(11) NOT NULL AUTO_INCREMENT;
-select * from domicilio;
-delete from empleado where id_domicilio >5;
+insert into Usuario (username, password, id_persona)
+values ('M4R10', 1111, 1);
+insert into Persona (nombre, apellido, fecha_nacimiento, numero_documento, estado, id_tipo_documento)
+values ('Mario', 'Billordo', '1960-09-02', 12121212, 1, 1);
+select TIMESTAMPDIFF (HOUR, fecha_hora_ingreso, fecha_hora_salida) as horas_trabajadas from asistencia where id_empleado=3;
+insert into asistencia (fecha_hora_ingreso, fecha_hora_salida, id_horario, id_empleado)
+values ('2020-10-23 08:00:01', '2020-10-23 13:10:12', 3, 3),
+('2020-10-23 13:11:22', '2020-10-23 21:52:59', 4, 2),
+('2020-10-24 08:02:32', '2020-10-24 13:03:31', 3, 4),
+('2020-10-24 16:30:13', '2020-10-24 20:00:43', 2, 3),
+('2020-10-25 08:05:00', '2020-10-25 14:00:00', 1, 4);
+SELECT persona.nombre, persona.apellido, asistencia.fecha_hora_ingreso, asistencia.fecha_hora_salida, 
+SEC_TO_TIME(SUM(TIME_TO_SEC(asistencia.fecha_hora_salida) - TIME_TO_SEC(asistencia.fecha_hora_ingreso))) AS timediff 
+FROM asistencia 
+INNER JOIN empleado ON asistencia.id_empleado = empleado.id_empleado 
+INNER JOIN persona ON empleado.id_persona = persona.id_persona 
+WHERE asistencia.fecha_hora_ingreso BETWEEN '2020-10-23 00:00:00' AND '2020-10-25 00:00:00' and empleado.id_empleado = 3
+GROUP BY asistencia.id_asistencia;
+insert into horario (hora_ingreso, hora_salida)
+values ('08:00:00', '14:00:00'),
+('17:00:00', '22:00:00'),
+('08:00:00', '13:00:00'),
+('13:00:00', '18:00:00'),
+('18:00:00', '22:00:00');
+select * from horario;
 
 
+SELECT persona.nombre, persona.apellido, asistencia.fecha_hora_ingreso, horario.hora_ingreso, SEC_TO_TIME(SUM(TIME_TO_SEC(horario.hora_ingreso) - TIME_TO_SEC(asistencia.fecha_hora_ingreso))) AS timediff 
+FROM asistencia 
+INNER JOIN horario ON asistencia.id_horario = horario.id_horario 
+INNER JOIN empleado ON asistencia.id_empleado = empleado.id_empleado 
+INNER JOIN persona ON empleado.id_persona = persona.id_persona 
+WHERE asistencia.fecha_hora_ingreso BETWEEN '2020-10-23 00:00:00' AND '2020-10-26 00:00:00' and empleado.id_empleado = 2 
+GROUP BY asistencia.id_asistencia;
+
+
+delete from horario where id_horario > 0;
+SELECT * FROM empleado AS e JOIN persona AS p ON e.id_persona = p.id_persona;
+select * from asistencia;
+select * from senial;
+select * from video;
+SELECT id_horario, hora_ingreso, hora_salida FROM horario;
 /*SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;*/

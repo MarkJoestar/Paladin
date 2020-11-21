@@ -9,7 +9,7 @@ class Usuario extends Persona {
     private $_username;
     private $_password;
     private $_estaLogueado;
-
+    private $_imagenPerfil;
     public $perfil;
     
     public function getIdUsuario()
@@ -40,6 +40,18 @@ class Usuario extends Persona {
         return $this;
     }
 
+    public function getImagenPerfil()
+    {
+        return $this->_imagenPerfil; 
+    }
+
+    public function setImagenPerfil($_imagenPerfil)
+    {
+        $this->_imagenPerfil = $_imagenPerfil;
+
+        return $this;
+    }
+
 
     public static function obtenerTodos() {
         $sql = "SELECT persona.id_persona, persona.nombre, persona.apellido, usuario.id_usuario, usuario.username, usuario.password "
@@ -60,6 +72,8 @@ class Usuario extends Persona {
         $usuario->_password = $data['password'];
         $usuario->_idUsuario = $data['id_usuario'];
         $usuario->_idPersona = $data['id_persona'];
+        $usuario->_imagenPerfil = $data['imagen_perfil'];
+        //$usuario->setFotoPerfil();
         return $usuario;
     }
     public static function obtenerPorId($id) {
@@ -81,6 +95,7 @@ class Usuario extends Persona {
         $usuario->_idPersona = $registro['id_persona'];
         $usuario->_username = $registro['username'];
         $usuario->_password = $registro['password'];
+        $usuario->_imagenPerfil = $registro['imagen_perfil'];
 
         return $usuario;
     }
@@ -118,6 +133,7 @@ class Usuario extends Persona {
             $usuario->_idPersona = $registro['id_persona'];
             $usuario->_username = $registro['username'];
             $usuario->_idPerfil = $registro['id_perfil'];
+            $usuario->_imagenPerfil = $registro['imagen_perfil'];
             $usuario->_estaLogueado = true;
 
             //$usuario->perfil = Perfil::obtenerPorId($usuario->_idPerfil);
@@ -141,20 +157,24 @@ class Usuario extends Persona {
     public function guardar() {
         parent::guardar();
 
-        $sql = "INSERT INTO Usuario (id_usuario, username, password, id_persona)"
-             . "VALUES (NULL, '$this->_username', '$this->_password', $this->_idPersona)";
+        $sql = "INSERT INTO Usuario (id_usuario, username, password, id_persona, imagen_perfil)"
+             . "VALUES (NULL, '$this->_username', '$this->_password', $this->_idPersona, '$this->_imagenPerfil')";
 
         $mysql = new MySQL();
         $idInsertado = $mysql->insertar($sql);
 
         $this->_idUsuario = $idInsertado;
+        //echo $sql;
+        //exit;
     }
     public function actualizar() {
         parent::actualizar();
 
-        $sql = "UPDATE Usuario SET username = '$this->_username' WHERE id_usuario = $this->_idUsuario";
+        $sql = "UPDATE Usuario SET username = '$this->_username', password = '$this->_password', imagen_perfil = '$this->_imagenPerfil' WHERE id_usuario = $this->_idUsuario";
         $mysql = new MySQL();
         $mysql->actualizar($sql);
+        //echo $sql;
+        //exit;
     }
 
     public function eliminar(){
